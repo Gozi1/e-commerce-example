@@ -781,3 +781,9 @@ margin-top: 160px;
 #menu.visible .a{
   flex-direction: row;
 }
+.profile{
+  position:relative;
+  font-size: 15px;
+  color: gray;
+  margin: 10px;
+}

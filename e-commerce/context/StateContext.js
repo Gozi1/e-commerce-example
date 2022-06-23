@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import { auth, logInWithEmailAndPassword,registerWithEmailAndPassword,logout,db } from "../Lib/firebaseClient";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Router from 'next/router'
-import { async } from '@firebase/util';
+
 
 const Context = createContext()
 export const StateContext = ({ children }) => {
@@ -19,15 +19,12 @@ export const StateContext = ({ children }) => {
     let index;
     const login =async(email,password)=>{
       await logInWithEmailAndPassword(email,password)
-      await user
-      if(user)Router.push('/')
-      return
+      return  
     }
     const signUp =async(email,password)=>{
       await registerWithEmailAndPassword(email,password)
       await logInWithEmailAndPassword(email,password)
-      
-      Router.push('/')
+      return
       
     }
     
@@ -69,14 +66,29 @@ export const StateContext = ({ children }) => {
       foundProduct = cartItems.find((item) => item._id === id)
       index = cartItems.findIndex((product) => product._id === id);
       const newCartItems = cartItems.filter((item) => item._id !== id)
-  
+      let updatedCartItem;
+      let updatedCartItems;
+      
       if(value === 'inc') {
         setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1 } ]);
+        updatedCartItem = {
+          ...foundProduct,
+          quantity: foundProduct.quantity +1
+       }
+        updatedCartItems = [...cartItems];
+        updatedCartItems[index] = updatedCartItem
+        setCartItems([...updatedCartItems])
         setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price)
         setTotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
       } else if(value === 'dec') {
         if (foundProduct.quantity > 1) {
-          setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity - 1 } ]);
+          updatedCartItem = {
+            ...foundProduct,
+            quantity: foundProduct.quantity -1
+        }
+          updatedCartItems = [...cartItems];
+          updatedCartItems[index] = updatedCartItem
+          setCartItems([...updatedCartItems])
           setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price)
           setTotalQuantities(prevTotalQuantities => prevTotalQuantities - 1)
         }

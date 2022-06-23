@@ -1,12 +1,14 @@
 import React,{useState} from 'react'
 import { useStateContext } from '../context/StateContext';
+import Router from 'next/router'
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login,signUp} = useStateContext();
-
+  const { login,signUp,user} = useStateContext();
+  if(user) Router.push('/')
   return (
+    
     <div>
     
     <div className="mb-3">
@@ -40,7 +42,7 @@ const Login = () => {
       <button  
       className="btn btn-primary"
       onClick={() => signUp(email, password)}>
-        Sign Up
+        Sign Up & Sign In
       </button>
     </div>
     </div> 

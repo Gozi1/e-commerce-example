@@ -19,15 +19,15 @@ const Navbar = () => {
 			</p>
 
 			<div className={isOpen ? 'visible' : ''} role='menu' id='menu'>
-				{!user&& <Link {...itemProps[0]} href={`/Login`} id='menu-item-1'>
+				{!user&&  <a className='profile'><Link  {...itemProps[0]} href={`/Login`} id='menu-item-1'>
 					Login / Sign Up
-				</Link>}
+				</Link></a>}
 
-				{user && <a {...itemProps[1]}  id='menu-item-2'>
+				{user && <a className='profile'{...itemProps[1]}  id='menu-item-2'>
 					{user.email}
 				</a>}
 
-				{user && <a {...itemProps[2]} onClick={() => logout()} id='menu-item-3'>
+				{user && <a className='profile' {...itemProps[2]} onClick={() => logout()} id='menu-item-3'>
 					Log Out
 				</a>}
 			</div>
