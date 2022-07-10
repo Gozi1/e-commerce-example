@@ -16,12 +16,7 @@ import {
 } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDjnLbKdxtu7rdKZEGP8Pm9W2odFTN59ro",
-    authDomain: "e-commerce-a5c19.firebaseapp.com",
-    projectId: "e-commerce-a5c19",
-    storageBucket: "e-commerce-a5c19.appspot.com",
-    messagingSenderId: "854306671895",
-    appId: "1:854306671895:web:cbe7d6ffe80ae8b8207b52"
+ //private firebase confige
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
